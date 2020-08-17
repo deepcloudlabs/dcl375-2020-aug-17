@@ -15,10 +15,11 @@ import javax.inject.Named;
 // Component-based Programming : do not use new!
 // Container (Application Server -> TomEE) -> Life Cycle
 // Annotation (Java SE 5) -> Declarative Programming
-@Named // CDI (Context and Dependency Injection) Component
+@Named("lottery") // CDI (Context and Dependency Injection) Component
 @RequestScoped // Scope: created when request received, destroyed when response sent
 public class LotteryViewModel {
-	private List<Integer> numbers; // lottery numbers -> JSP (Java Server Pages)
+	// ${lottery.numbers} : JSP Expression Language
+	private List<Integer> numbers; // lottery numbers -> JSP (Java Server Pages) -> HTML
 
 	public LotteryViewModel() {
 		numbers = ThreadLocalRandom.current()
