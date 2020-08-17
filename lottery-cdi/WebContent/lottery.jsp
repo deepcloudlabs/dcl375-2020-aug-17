@@ -4,6 +4,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style type="text/css">
+  tbody > tr:nth-child(2n) {
+      background-color: #EFEFEF;
+  }
+  tbody > tr:nth-child(2n+1) {
+      background-color: #DFDFDF;
+  }
+  tbody > tr:hover {
+      background-color: lightyellow;
+  }
+</style>
 <meta charset="ISO-8859-1">
 <title>Lottery Page</title>
 </head>
