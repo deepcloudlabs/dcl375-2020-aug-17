@@ -16,7 +16,7 @@
   }
 </style>
 <meta charset="ISO-8859-1">
-<title>Lottery Page</title>
+<title>Lottery Page v3</title>
 </head>
 <body>
 	<form action="draw" method="post">
