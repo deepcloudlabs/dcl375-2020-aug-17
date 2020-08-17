@@ -1,9 +1,10 @@
 package com.example.lottery.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
 // Ctrl + Shift + O : Organize Import
@@ -18,8 +19,8 @@ import javax.inject.Named;
 // CDI Bean -> CDI Component
 // Spring Bean -> Spring Component
 @Named("lottery") // CDI (Context and Dependency Injection) Component
-@RequestScoped // Scope: created when request received, destroyed when response sent
-public class LotteryViewModel {
+@SessionScoped // Scope: created when request received, destroyed when response sent
+public class LotteryViewModel implements Serializable {
 	// ${lottery.numbers} : JSP Expression Language
 	private List<List<Integer>> numbers; // lottery numbers -> JSP (Java Server Pages) -> HTML
 

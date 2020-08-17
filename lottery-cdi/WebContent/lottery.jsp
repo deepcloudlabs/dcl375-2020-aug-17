@@ -26,7 +26,8 @@
 		       value="${param.column}"
 			   min="1" 
 			   name="column">
-		<button>Draw</button>
+		<button name="action" value="draw">Draw</button>
+		<button name="action" value="reset">Reset</button>
 	</form>
 	<c:if test="${not empty lottery.numbers}">
 	<table>
