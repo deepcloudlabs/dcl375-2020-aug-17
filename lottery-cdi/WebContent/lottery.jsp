@@ -9,12 +9,35 @@
 </head>
 <body>
 	<form action="draw" method="post">
-	    <button>Draw</button>
-		<ul>
-			<c:forEach items="${lottery.numbers}" var="num">
-				<li>${num}</li>
-			</c:forEach>
-		</ul>
+		<label for="column">Column:</label> 
+		<input id="column" 
+		       type="number"
+		       value="${param.column}"
+			   min="1" 
+			   name="column">
+		<button>Draw</button>
 	</form>
+	<c:if test="${not empty lottery.numbers}">
+	<table>
+		<thead>
+			<tr>
+			    <th>No</th>
+				<c:forEach begin="1" end="6" var="col">
+					<th>Number #${col}</th>
+				</c:forEach>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${lottery.numbers}" var="numbers" varStatus="loop">
+				<tr>
+				    <td>${loop.index + 1}</td>
+					<c:forEach items="${numbers}" var="num">
+						<td>${num}</td>
+					</c:forEach>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+	</c:if>
 </body>
 </html>

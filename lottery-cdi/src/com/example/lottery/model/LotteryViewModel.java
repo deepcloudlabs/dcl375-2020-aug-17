@@ -21,17 +21,17 @@ import javax.inject.Named;
 @RequestScoped // Scope: created when request received, destroyed when response sent
 public class LotteryViewModel {
 	// ${lottery.numbers} : JSP Expression Language
-	private List<Integer> numbers; // lottery numbers -> JSP (Java Server Pages) -> HTML
+	private List<List<Integer>> numbers; // lottery numbers -> JSP (Java Server Pages) -> HTML
 
 	public LotteryViewModel() {
 		numbers = new ArrayList<>();
 	}
 
-	public List<Integer> getNumbers() {
+	public List<List<Integer>> getNumbers() {
 		return numbers;
 	}
 
-	public void setNumbers(List<Integer> numbers) {
+	public void setNumbers(List<List<Integer>> numbers) {
 		this.numbers = numbers;
 	}
 	

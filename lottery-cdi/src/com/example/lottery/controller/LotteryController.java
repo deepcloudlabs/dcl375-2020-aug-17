@@ -35,7 +35,8 @@ public class LotteryController extends HttpServlet {
 
 	// user clicks "draw" button
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		var numbers = lotteryService.draw();  // delegate the request to service
+		var column = Integer.parseInt(request.getParameter("column"));
+		var numbers = lotteryService.draw(column);  // delegate the request to service
 		lotteryViewModel.setNumbers(numbers); // update/create model
 		request.getRequestDispatcher("lottery.jsp") // dispatch the request to 
 	       .forward(request, response);		 // the view component (lottery.jsp)
