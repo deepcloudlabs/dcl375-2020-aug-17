@@ -46,7 +46,6 @@ public class LotteryController extends HttpServlet {
 			break;
 		case "reset":
 			lotteryViewModel.getNumbers().clear();
-			;
 			break;
 
 		default:

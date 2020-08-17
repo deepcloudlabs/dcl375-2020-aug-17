@@ -18,6 +18,7 @@ import javax.inject.Named;
 // Bean -> Component
 // CDI Bean -> CDI Component
 // Spring Bean -> Spring Component
+@SuppressWarnings("serial")
 @Named("lottery") // CDI (Context and Dependency Injection) Component
 @SessionScoped // Scope: created when request received, destroyed when response sent
 public class LotteryViewModel implements Serializable {
