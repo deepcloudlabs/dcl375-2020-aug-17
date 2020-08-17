@@ -1,8 +1,7 @@
 package com.example.lottery.model;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
-import java.util.stream.Collectors;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -15,6 +14,9 @@ import javax.inject.Named;
 // Component-based Programming : do not use new!
 // Container (Application Server -> TomEE) -> Life Cycle
 // Annotation (Java SE 5) -> Declarative Programming
+// Bean -> Component
+// CDI Bean -> CDI Component
+// Spring Bean -> Spring Component
 @Named("lottery") // CDI (Context and Dependency Injection) Component
 @RequestScoped // Scope: created when request received, destroyed when response sent
 public class LotteryViewModel {
@@ -22,13 +24,7 @@ public class LotteryViewModel {
 	private List<Integer> numbers; // lottery numbers -> JSP (Java Server Pages) -> HTML
 
 	public LotteryViewModel() {
-		numbers = ThreadLocalRandom.current()
-				                   .ints(1,50)
-				                   .distinct()
-				                   .limit(6)
-				                   .sorted()
-				                   .boxed()
-				                   .collect(Collectors.toList());
+		numbers = new ArrayList<>();
 	}
 
 	public List<Integer> getNumbers() {
