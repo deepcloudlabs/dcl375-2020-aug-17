@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +32,16 @@ public class SimpleLotteryService implements LotteryService {
     private Map<String, RandomNumberService> randomNumberServiceMap;
 
 	private int counter;
+
+	@Value("${lottery.min}") 
+	private int lotteryMin;
+
+	@Value("${lottery.max}")
+	private int lotteryMax;
+
+	// @Value("#{calculator.add(10,10)}") // SpEL: SPring Expression Language
+	@Value("${lottery.size}")
+	private long lotterySize;
     
     @PostConstruct
     public void init() {
@@ -47,9 +58,9 @@ public class SimpleLotteryService implements LotteryService {
 	public List<Integer> draw() {
 		var rndSrv = randomNumberServices.get(counter++ % randomNumberServices.size());
 
-		return IntStream.generate(() -> rndSrv.generate(1, 50))
+		return IntStream.generate(() -> rndSrv.generate(lotteryMin, lotteryMax))
 				     .distinct()
-				     .limit(6)
+				     .limit(lotterySize)
 				     .sorted()
 				     .boxed()
 				     .collect(Collectors.toList());
