@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Scope;
 
 import com.example.imdb.domain.Genre;
@@ -16,6 +17,7 @@ import com.example.imdb.service.business.InMemoryMovieService;
 // MicroService -> DDD -> Hexagonal Architecture -> Application Class (POJO) -> @Configuration, @Bean
 @Configuration
 @ComponentScan("com.example.imdb")
+@EnableAspectJAutoProxy
 public class AppConfig {
 	@Autowired
 	private SequenceService sequenceSrv;

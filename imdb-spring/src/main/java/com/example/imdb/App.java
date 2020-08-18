@@ -11,6 +11,8 @@ public class App {
 		ConfigurableApplicationContext container =
 				new AnnotationConfigApplicationContext(AppConfig.class);
 		var movieSrv = container.getBean(MovieService.class);
+		// class com.sun.proxy.$Proxy23 (JDK, Reflect API, Proxy-based AOP)
+		System.err.println(movieSrv.getClass());
 		var genre = "Drama";
 		var fromYear = 1970;
 		var toYear = 1979;
