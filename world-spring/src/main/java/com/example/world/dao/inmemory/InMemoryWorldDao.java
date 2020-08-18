@@ -9,6 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
@@ -24,6 +25,7 @@ import com.example.world.domain.Country;
 @Scope("prototype")// Prototype
 //@Scope("request")// Spring MVC
 //@Scope("session")// Spring MVC
+@Profile("test")
 public class InMemoryWorldDao implements WorldDao {
 	private Map<String, Country> countries;
 	private Map<Integer, City> cities;
