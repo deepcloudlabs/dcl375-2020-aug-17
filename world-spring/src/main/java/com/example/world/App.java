@@ -3,8 +3,6 @@ package com.example.world;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.example.world.dao.CityDao;
-import com.example.world.dao.CountryDao;
 import com.example.world.dao.WorldDao;
 
 // Component Definition
@@ -19,10 +17,7 @@ import com.example.world.dao.WorldDao;
 // Ctrl+M
 public class App {
 	public static void main(String[] args) {
-		ConfigurableApplicationContext container =
-				new AnnotationConfigApplicationContext(
-						"com.example.world"
-				);
+		ConfigurableApplicationContext container = new AnnotationConfigApplicationContext("com.example.world");
 		System.err.println("Container is ready to serve!");
 //		container.getBean(WorldDao.class);
 //		container.getBean(CountryDao.class);
@@ -30,8 +25,7 @@ public class App {
 		// List Asian Countries
 		var worldDao = container.getBean(WorldDao.class);
 		var continent = "Asia";
-		worldDao.findCountriesByContinent(continent)
-		        .forEach(System.err::println);
+		worldDao.findCountriesByContinent(continent).forEach(System.err::println);
 		container.close();
 	}
 }
