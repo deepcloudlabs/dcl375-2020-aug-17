@@ -1,6 +1,6 @@
 package com.example.lottery.service.business;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.stereotype.Service;
 
@@ -9,15 +9,13 @@ import com.example.lottery.service.RandomNumberService;
 import com.example.lottery.service.RandomServiceType;
 
 @Service
-@RandomServiceType(QualityType.SIMPLE)
-public class SimpleRandomNumberService implements RandomNumberService {
-
-	private Random random = new Random();
+@RandomServiceType(QualityType.FAST)
+public class FastRandomNumberService implements RandomNumberService {
 
 	@Override
 	public int generate(int min, int max) {
-		System.err.println("SimpleRandomNumberService::generate");
-		return random.nextInt(max-min+1)+min;
+		System.err.println("FastRandomNumberService::generate");
+		return ThreadLocalRandom.current().nextInt(min, max);
 	}
 
 }

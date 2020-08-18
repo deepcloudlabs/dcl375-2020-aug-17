@@ -7,11 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.lottery.service.LotteryService;
+import com.example.lottery.service.QualityType;
 import com.example.lottery.service.RandomNumberService;
+import com.example.lottery.service.RandomServiceType;
 
 @Service
 public class SimpleLotteryService implements LotteryService {
     @Autowired
+    @RandomServiceType(QualityType.FAST)
     private RandomNumberService randomNumberService;
     
 	@Override
