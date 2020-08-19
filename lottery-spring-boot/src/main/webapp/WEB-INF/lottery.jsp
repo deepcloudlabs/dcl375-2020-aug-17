@@ -21,11 +21,11 @@ tbody>tr:hover {
 <title>Lottery Page v3</title>
 </head>
 <body>
-	<form action="draw" method="post">
+	<form method="post">
 		<label for="column">Column:</label> <input id="column" type="number"
 			value="${param.column}" min="1" name="column">
-		<button name="action" value="draw">Draw</button>
-		<button name="action" value="reset">Reset</button>
+		<button formaction="draw" value="draw">Draw</button>
+		<button formaction="reset" value="reset">Reset</button>
 	</form>
 	<c:if test="${not empty lottery.numbers}">
 		<table>
