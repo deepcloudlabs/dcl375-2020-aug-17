@@ -1,8 +1,12 @@
 package com.example.imdb.aop;
 
+import java.util.concurrent.TimeUnit;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -21,14 +25,33 @@ public class ProfilingAspect {
 //	@AfterThrowing
 //	@AfterReturning
 //	@After
-	@Around("within(com.example.imdb.service.business..*Impl)") // invasive
+	@Around("classProfilerAnnotated() || methodProfilerAnnotated()") // invasive
 	public Object audit(ProceedingJoinPoint pjp) throws Throwable {
 		var start = System.nanoTime();
-		String method = pjp.getSignature().getName();
+		var clazz = pjp.getTarget().getClass();
+		TimeUnit tu = TimeUnit.NANOSECONDS;
+		if (clazz.isAnnotationPresent(Profiler.class)) {
+			tu = clazz.getAnnotation(Profiler.class).unit();
+		}
+		var signature = (MethodSignature) pjp.getSignature();
+		var method = clazz.getDeclaredMethod(signature.getName(), signature.getParameterTypes());
+		if (method.isAnnotationPresent(Profiler.class)) {
+			tu = method.getAnnotation(Profiler.class).unit();
+		}
 		var result = pjp.proceed();
-		System.err.println("ProfilingAspect::Target is "+pjp.getTarget().getClass());
+		System.err.println("ProfilingAspect::Target is " + pjp.getTarget().getClass());
 		var stop = System.nanoTime();
-		System.err.println(method + " runs "+(stop-start)+" ns.");
+		System.err.println(
+				method.getName() + " runs " + tu.convert((stop - start), TimeUnit.NANOSECONDS) + " " + tu.name().toLowerCase());
 		return result;
 	}
+
+	@Pointcut("@annotation(com.example.imdb.aop.Profiler)")
+	public void classProfilerAnnotated() {
+	}
+
+	@Pointcut("within(@com.example.imdb.aop.Profiler *)")
+	public void methodProfilerAnnotated() {
+	}
+
 }

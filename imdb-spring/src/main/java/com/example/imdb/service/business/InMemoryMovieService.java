@@ -4,7 +4,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+
+import com.example.imdb.aop.Profiler;
 import com.example.imdb.domain.Director;
 import com.example.imdb.domain.Genre;
 import com.example.imdb.domain.Movie;
@@ -1534,6 +1539,7 @@ public class InMemoryMovieService implements MovieService {
 	}
 
 	@Override
+	@Profiler(unit=TimeUnit.MILLISECONDS)
 	public Collection<Movie> findAllMoviesByYearRangeAndGenre(String genre,
 			int fromYear, int toYear) {
 		Collection<Movie> resultList = new ArrayList<>();
@@ -1578,6 +1584,7 @@ public class InMemoryMovieService implements MovieService {
 	}
 
 	@Override
+	@CacheEvict("genres")
 	public Movie addMovie(Movie movie) {
 		if (movie.getId() < 0)
 			movie.setId((int) sequenceSrv.nextId("movies"));
@@ -1586,7 +1593,9 @@ public class InMemoryMovieService implements MovieService {
 	}
 
 	@Override
+	@Cacheable(value = "genres")
 	public Collection<Genre> findAllGenres() {
+		System.err.println("InMemoryMovieService::findAllGenres()");
 		return genres.values();
 	}
 

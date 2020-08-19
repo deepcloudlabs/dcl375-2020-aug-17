@@ -32,7 +32,7 @@ public class AppConfig {
 		return movieSrv;
 	}
 
-	@Bean("genres")
+	//@Bean("genres")
 	public Collection<Genre> allGenres(MovieService movieSrv) {
 		return movieSrv.findAllGenres();
 	}

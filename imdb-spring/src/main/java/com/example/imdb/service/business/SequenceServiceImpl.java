@@ -1,10 +1,12 @@
 package com.example.imdb.service.business;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.stereotype.Service;
 
+import com.example.imdb.aop.Profiler;
 import com.example.imdb.service.SequenceService;
 
 /**
@@ -13,6 +15,7 @@ import com.example.imdb.service.SequenceService;
  *
  */
 @Service
+@Profiler(unit = TimeUnit.MICROSECONDS)
 public class SequenceServiceImpl implements SequenceService {
 	private Map<String, AtomicLong> sequences = new ConcurrentHashMap<String, AtomicLong>();
 
