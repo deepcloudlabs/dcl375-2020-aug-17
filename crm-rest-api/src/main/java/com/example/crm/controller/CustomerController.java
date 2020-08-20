@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.context.annotation.RequestScope;
 
 import com.example.crm.domain.Customer;
 import com.example.crm.service.CustomerService;
+import com.example.validation.TcKimlikNo;
 
 // Rest API Documentation:
 // 1. Swagger UI (Smart Bear), Soap UI, Open API v3
@@ -30,13 +32,14 @@ import com.example.crm.service.CustomerService;
 @RequestMapping("customers")
 @CrossOrigin
 // http://localhost:4001/crm/api/v1/customers (1) ✔
+@Validated
 public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 
 	// GET http://localhost:4001/crm/api/v1/customers/11111111110
 	@GetMapping("{identity}")
-	public Customer getCustomerByIdentity(@PathVariable String identity) {
+	public Customer getCustomerByIdentity(@PathVariable @TcKimlikNo String identity) {
 		return customerService.findCustomerByIdentity(identity);
 	}
 
@@ -48,22 +51,22 @@ public class CustomerController {
 	}
 
 	@PostMapping
-	public void addCustomer(@RequestBody Customer customer) {
+	public void addCustomer(@RequestBody @Validated Customer customer) {
 		customerService.createCustomer(customer);
 	}
 
 	@PutMapping
-	public void updateCustomer(@RequestBody Customer customer) {
+	public void updateCustomer(@RequestBody @Validated Customer customer) {
 		customerService.updateCustomer(customer);
 	}
 
 	@PatchMapping("{identity}")
-	public void patchCustomer(@PathVariable String identity, @RequestBody Map<String, Object> patchValues) {
+	public void patchCustomer(@PathVariable @TcKimlikNo String identity, @RequestBody @Validated Map<String, Object> patchValues) {
 		customerService.patchCustomer(identity, patchValues);
 	}
 	
 	@DeleteMapping("{identity}")
-	public Customer deleteCustomerByIdentity(@PathVariable String identity) {
+	public Customer deleteCustomerByIdentity(@PathVariable @TcKimlikNo String identity) {
 		return customerService.removeCustomerByIdentity(identity);
 	}
 	

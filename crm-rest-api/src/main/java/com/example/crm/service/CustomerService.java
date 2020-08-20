@@ -51,7 +51,10 @@ public class CustomerService {
 		managedCustomer.setAddress(customer.getAddress());
 		// customerRepository.save(managedCustomer);
 	}
-
+    // Distributed Transaction, XA Transaction
+    // Transaction Coordinator -> 2P(hase)C(ommit) -> NOT Scalable!
+    // Hard/Soft State, Eventual Consistent -> Saga/Compensation/Event Sourcing/...
+    // DDD, Hexagonal Architecture 
 	@Transactional
 	public void patchCustomer(String identity, Map<String, Object> patchValues) {
 		var optionalCustomer = customerRepository.findById(identity);

@@ -5,9 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+
+import com.example.validation.TcKimlikNo;
 
 // JPA: Java Persistence API (Java EE Specification)
 // JPA: ORM Tool: Table <--> Entity (Mapping)
@@ -25,17 +31,22 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicInsert
 public class Customer {
 	@Id
+	@TcKimlikNo
 	private String identity;
 	@Column(name = "full_name")
 	private String fullname;
 	@Column(unique = true)
+	@Email
 	private String email;
+	@Size(min = 10, max=40)
 	private String address;
+	@Pattern(regexp = "^\\+\\d{8,12}$")
 	private String phone;
 	@Lob
 	@Column(columnDefinition = "longblob")
 	private byte[] photo;
 	@Column(name = "birth_year")
+	@Min(1941)
 	private int birthYear;
 
 	public Customer() {
