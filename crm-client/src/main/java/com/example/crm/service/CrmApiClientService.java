@@ -7,6 +7,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.example.crm.domain.Customer;
 
+@SuppressWarnings("deprecation")
 @Service
 public class CrmApiClientService {
 	private static final String CRM_REST_URL = "http://localhost:4001/crm/api/v1/customers";
