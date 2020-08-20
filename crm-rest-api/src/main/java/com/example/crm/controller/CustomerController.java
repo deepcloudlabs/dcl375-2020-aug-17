@@ -20,6 +20,11 @@ import org.springframework.web.context.annotation.RequestScope;
 import com.example.crm.domain.Customer;
 import com.example.crm.service.CustomerService;
 
+// Rest API Documentation:
+// 1. Swagger UI (Smart Bear), Soap UI, Open API v3
+// 2. RAML (https://raml.org)
+// 3. Spring REST Doc: Test -> (PDF, Html)
+
 @RestController
 @RequestScope
 @RequestMapping("customers")
