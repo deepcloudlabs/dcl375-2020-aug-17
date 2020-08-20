@@ -4,12 +4,13 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.crm.domain.Customer;
@@ -38,7 +39,7 @@ public class CustomerService {
 		customerRepository.save(customer);
 	}
 
-	@Transactional
+    @Transactional(isolation = Isolation.READ_COMMITTED,  propagation = Propagation.REQUIRES_NEW)
 	public void updateCustomer(Customer customer) {
 		var identity = customer.getIdentity();
 		var optionalCustomer = customerRepository.findById(identity);

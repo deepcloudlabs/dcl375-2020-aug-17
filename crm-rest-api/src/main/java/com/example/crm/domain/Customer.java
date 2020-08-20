@@ -6,6 +6,9 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 // JPA: Java Persistence API (Java EE Specification)
 // JPA: ORM Tool: Table <--> Entity (Mapping)
 // Mapping: Annotations
@@ -18,6 +21,8 @@ import javax.persistence.Table;
 // Ctrl + Shift + F : Format
 @Entity
 @Table(name = "customers")
+@DynamicUpdate
+@DynamicInsert
 public class Customer {
 	@Id
 	private String identity;
