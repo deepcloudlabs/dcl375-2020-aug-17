@@ -20,6 +20,22 @@ class CrmViewModel {
         this.handleError = this.handleError.bind(this);
     }
 
+    connectWebSocket = () => {
+        this.socket = new SockJS("http://localhost:4001/crm/api/v1/changes");
+        this.stompClient = Stomp.over(this.socket);
+        this.stompClient.debug = () => {}
+        this.stompClient.connect({}, (frame) => {
+            toastr.success("WebSocket connection is ready!");
+            this.stompClient.subscribe(
+                "/topic/changes",
+                (msg) => {
+                    let payload = JSON.parse(msg.body);
+                    payload.customer.photo= toSrcImage(payload.customer.photo);
+                    this.customers.push(payload.customer);
+                });
+        });
+    }
+
     changeLangToEn(){
         this.changeLang('en');
     }
