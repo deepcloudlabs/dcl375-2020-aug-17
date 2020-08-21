@@ -8,6 +8,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.crm.service.CustomerService;
 
+// How to start Mongo server: C:\DEVEL\stage\var\scripts\mongod.bat
+// How to start Mongo CLI: C:\DEVEL\stage\var\scripts\mongo-cli.bat
+
+// How to start MySQL server: C:\DEVEL\stage\var\scripts\start-mysql.bat
+// How to start MySQL CLI: C:\DEVEL\stage\var\scripts\mysql-cli.bat
 @SpringBootApplication
 public class CrmRestApiApplication implements ApplicationRunner {
 	@Autowired

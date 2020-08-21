@@ -18,45 +18,40 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.annotation.RequestScope;
 
-import com.example.crm.domain.Customer;
-import com.example.crm.service.CustomerService;
+import com.example.crm.domain.CustomerDocument;
+import com.example.crm.service.CustomerMongoService;
 import com.example.validation.TcKimlikNo;
-
-// Rest API Documentation:
-// 1. Swagger UI (Smart Bear), Soap UI, Open API v3
-// 2. RAML (https://raml.org)
-// 3. Spring REST Doc: Test -> (PDF, Html)
 
 @RestController
 @RequestScope
-@RequestMapping("customers2")
+@RequestMapping("customers")
 @CrossOrigin
 // http://localhost:4001/crm/api/v1/customers (1) ✔
 @Validated
-public class CustomerController {
+public class CustomerDocumentController {
 	@Autowired
-	private CustomerService customerService;
+	private CustomerMongoService customerService;
 
 	// GET http://localhost:4001/crm/api/v1/customers/11111111110
 	@GetMapping("{identity}")
-	public Customer getCustomerByIdentity(@PathVariable @TcKimlikNo String identity) {
+	public CustomerDocument getCustomerByIdentity(@PathVariable @TcKimlikNo String identity) {
 		return customerService.findCustomerByIdentity(identity);
 	}
 
 	// GET http://localhost:4001/crm/api/v1/customers?page=10&size=25
 	@GetMapping(params = { "page", "size" })
-	public List<Customer> getCustomers(@RequestParam(name = "page", required = true, defaultValue = "0") int page,
+	public List<CustomerDocument> getCustomers(@RequestParam(name = "page", required = true, defaultValue = "0") int page,
 			@RequestParam(name = "size", required = true, defaultValue = "10") int size) {
 		return customerService.findCustomersWithPagination(page, size);
 	}
 
 	@PostMapping
-	public void addCustomer(@RequestBody @Validated Customer customer) {
+	public void addCustomer(@RequestBody @Validated CustomerDocument customer) {
 		customerService.createCustomer(customer);
 	}
 
 	@PutMapping
-	public void updateCustomer(@RequestBody @Validated Customer customer) {
+	public void updateCustomer(@RequestBody @Validated CustomerDocument customer) {
 		customerService.updateCustomer(customer);
 	}
 
@@ -66,8 +61,8 @@ public class CustomerController {
 	}
 	
 	@DeleteMapping("{identity}")
-	public Customer deleteCustomerByIdentity(@PathVariable @TcKimlikNo String identity) {
+	public CustomerDocument deleteCustomerByIdentity(@PathVariable @TcKimlikNo String identity) {
 		return customerService.removeCustomerByIdentity(identity);
 	}
-	
+
 }
