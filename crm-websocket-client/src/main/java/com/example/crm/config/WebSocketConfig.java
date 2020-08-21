@@ -21,7 +21,7 @@ public class WebSocketConfig {
 	@Bean
 	public WebSocketClient webSocketClient() {
 		var container = ContainerProvider.getWebSocketContainer();
-		container.setDefaultMaxTextMessageBufferSize(16 * 1024 * 1024);
+		container.setDefaultMaxTextMessageBufferSize(16 * 1024 * 1024); // 16M
 		return new StandardWebSocketClient(container);
 	}
 
