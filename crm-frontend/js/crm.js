@@ -9,6 +9,11 @@ class CrmViewModel {
         this.fileData = ko.observable({
             dataUrl: ko.observable(AppConfig.NO_IMAGE)
         });
+        this.x = ko.observable(2);
+        this.y = ko.observable(3);
+        this.z = ko.computed(()=>{
+            return this.x() + this.y();
+        })
         // bind methods to this
         this.findCustomerByIdentity = this.findCustomerByIdentity.bind(this);
         this.findAllCustomers = this.findAllCustomers.bind(this);

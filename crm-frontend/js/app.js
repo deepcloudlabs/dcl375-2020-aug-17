@@ -7,6 +7,6 @@ $(document).ready(() => {
             decorateInputElement: true
         }, true);
         ko.applyBindings(crm);
-        crm.connectWebSocket();
+        //crm.connectWebSocket();
     })
 });
