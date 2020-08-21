@@ -5,6 +5,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 import com.example.crm.service.CustomerService;
 
@@ -14,6 +15,7 @@ import com.example.crm.service.CustomerService;
 // How to start MySQL server: C:\DEVEL\stage\var\scripts\start-mysql.bat
 // How to start MySQL CLI: C:\DEVEL\stage\var\scripts\mysql-cli.bat
 @SpringBootApplication
+@EnableWebSecurity
 public class CrmRestApiApplication implements ApplicationRunner {
 	@Autowired
 	private CustomerService customerService;

@@ -40,7 +40,8 @@ public class CustomerDocumentController {
 
 	// GET http://localhost:4001/crm/api/v1/customers?page=10&size=25
 	@GetMapping(params = { "page", "size" })
-	public List<CustomerDocument> getCustomers(@RequestParam(name = "page", required = true, defaultValue = "0") int page,
+	public List<CustomerDocument> getCustomers(
+			@RequestParam(name = "page", required = true, defaultValue = "0") int page,
 			@RequestParam(name = "size", required = true, defaultValue = "10") int size) {
 		return customerService.findCustomersWithPagination(page, size);
 	}
