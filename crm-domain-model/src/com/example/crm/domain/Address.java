@@ -11,7 +11,7 @@ public class Address {
 	private final String city;
 	private final String country;
 	private final String zipCode;
-	
+
 	public Address(String street, String city, String country, String zipCode) {
 		this.street = street;
 		this.city = city;
@@ -80,7 +80,7 @@ public class Address {
 
 	@Override
 	public String toString() {
-		return "Address [street=" + street + ", city=" + city + ", country=" + country + ", zipCode=" + zipCode + "]";
+		return street + ", " + zipCode + ", " + city + "/" + country;
 	}
-	
+
 }

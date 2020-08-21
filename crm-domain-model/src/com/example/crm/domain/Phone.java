@@ -88,8 +88,7 @@ public class Phone {
 
 	@Override
 	public String toString() {
-		return "Phone [countryCode=" + countryCode + ", cityCode=" + cityCode + ", number=" + number + ", extension="
-				+ extension + "]";
+		return countryCode + "-" + cityCode + "-" + number + "-" + extension;
 	}
 
 }

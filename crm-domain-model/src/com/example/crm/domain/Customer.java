@@ -115,9 +115,18 @@ public class Customer {
 			this.phone = Phone.of(countryCode, cityCode, number, extension);
 			return this;
 		}
+		public Builder phone(String phoneString) {
+			this.phone = Phone.of("", "", phoneString, "");
+			return this;
+		}
 
 		public Builder address(String street, String city, String country, String zipCode) {
 			this.address = new Address(street, city, country, zipCode);
+			return this;
+		}
+		
+		public Builder address(String addressString) {
+			this.address = new Address(addressString, "", "", "");
 			return this;
 		}
 

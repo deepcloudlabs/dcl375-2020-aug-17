@@ -1,0 +1,16 @@
+com\example\crm\application\business\SimpleCrmApplication.class
+com\example\crm\events\CustomerAcquiredEvent.class
+com\example\crm\application\CrmApplication.class
+com\example\crm\infrastructure\EventPushlisher.class
+com\example\crm\repository\CustomerRepository.class
+com\example\crm\domain\Photo.class
+com\example\crm\domain\Address.class
+com\example\crm\domain\Phone.class
+com\example\crm\events\CustomerLosedEvent.class
+com\example\crm\domain\TcKimlikNo.class
+com\example\crm\domain\Customer$Builder.class
+com\example\crm\domain\BirthYear.class
+com\example\crm\domain\Email.class
+com\example\crm\domain\Customer.class
+com\example\crm\domain\FullName.class
+com\example\crm\events\BusinessEvent.class
