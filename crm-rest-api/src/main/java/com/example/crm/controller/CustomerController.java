@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -62,13 +61,14 @@ public class CustomerController {
 	}
 
 	@PatchMapping("{identity}")
-	public void patchCustomer(@PathVariable @TcKimlikNo String identity, @RequestBody @Validated Map<String, Object> patchValues) {
+	public void patchCustomer(@PathVariable @TcKimlikNo String identity,
+			@RequestBody @Validated Map<String, Object> patchValues) {
 		customerService.patchCustomer(identity, patchValues);
 	}
-	
+
 	@DeleteMapping("{identity}")
 	public Customer deleteCustomerByIdentity(@PathVariable @TcKimlikNo String identity) {
 		return customerService.removeCustomerByIdentity(identity);
 	}
-	
+
 }
